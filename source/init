@@ -1,8 +1,6 @@
 #! /bin/bash
 
 service rsyslog start
-#/usr/sbin/cron
-#service mysql start 
 /opt/graphite/bin/carbon-daemon.py writer-1 start
 #/opt/graphite/bin/carbon-daemon.py writer-2 start
 /opt/graphite/bin/carbon-daemon.py relay start
