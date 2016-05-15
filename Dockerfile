@@ -1,12 +1,11 @@
 FROM ubuntu:14.04
 
-MAINTAINER Vadim Izvekov <vizvekov@asdco.ru>
+MAINTAINER Valentin Bakarinov <vbakarinov@asdco.ru>
 
 RUN apt-get update && apt-get install -y python python-pip python-twisted python-memcache python-pysqlite2 python-simplejson python-cairo python-django python-django-tagging python-txamqp python-pyparsing python-zope.interface python-dev libffi-dev git nginx curl vim mc --no-install-recommends
 RUN apt-get clean
 RUN apt-get autoremove
 RUN rm -rf /var/lib/apt/lists/*
-
 RUN pip install pytz mock nose
 
 WORKDIR /tmp
@@ -24,15 +23,9 @@ RUN mkdir /ceres
 RUN ceres-tree-create /ceres
 
 ADD source /
-
 RUN /usr/bin/django-admin syncdb --pythonpath /opt/graphite/webapp --settings graphite.settings --noinput
-
 RUN chmod +x /init
-
 VOLUME /ceres
-
 WORKDIR /
-
 EXPOSE 2003 2004 2104 2204 7002 8080
-
 CMD /init
