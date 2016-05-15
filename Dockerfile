@@ -28,4 +28,4 @@ RUN chmod +x /init
 VOLUME /ceres
 WORKDIR /
 EXPOSE 2003 2004 2104 2204 7002 8080
-CMD /init
+CMD /init &
