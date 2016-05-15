@@ -1,0 +1,5 @@
+[template]
+src = "megacarbon-relay.conf.tmpl"
+dest = "/opt/graphite/conf/carbon-daemons/relay/relay.conf"
+keys = ["/"]
+reload_cmd = "/opt/graphite/bin/carbon-daemon.py relay stop && /opt/graphite/bin/carbon-daemon.py relay start"

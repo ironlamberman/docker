@@ -1,0 +1,13 @@
+RELAY_METHOD = consistent-hashing
+{{ $servers := gets (printf "/%s/infrastructure/megacarbon/*" (getenv "ENV_NAME")) }}
+REPLICATION_FACTOR = {{ len $servers }}
+DESTINATIONS = {{range $servers}}{{if ne (getenv "container_uuid") (base .Key)}}{{base  .Value}}:2104:cache1,{{base  .Value}}:2204:cache2,{{end}}{{end}}{{getenv "HOST_IP"}}:2104:cache1,{{getenv "HOST_IP"}}:2204:cache2
+MAX_QUEUE_SIZE = 10000
+MAX_DATAPOINTS_PER_MESSAGE = 500
+QUEUE_LOW_WATERMARK_PCT = 0.8
+TIME_TO_DEFER_SENDING = 0.0001
+USE_FLOW_CONTROL = False
+USE_RATIO_RESET=False
+MIN_RESET_STAT_FLOW=1000
+MIN_RESET_RATIO=0.9
+MIN_RESET_INTERVAL=121
